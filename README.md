@@ -26,3 +26,101 @@ This project demonstrates a complete **serverless web application** deployed on 
 ## Architecture
 
 <img width="940" height="390" alt="severless drawio" src="https://github.com/user-attachments/assets/9336a247-e399-48a7-a3e5-1ed80344b658" />
+
+rontend (HTML/JS hosted on S3)
+|
+v
+API Gateway (REST endpoints)
+/insert --> Lambda (Insert Data) --> DynamoDB
+/employees --> Lambda (Get Data) --> DynamoDB
+|
+v
+CloudFront (Global Distribution)
+
+
+*(Add architecture diagram screenshot here)*
+
+---
+
+## Setup Instructions
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/<username>/aws-serverless-webapp-with-cloudfront.git
+cd aws-serverless-webapp-with-cloudfront
+
+2. Configure Frontend
+
+Open index.html.
+
+Update apiBaseUrl with your API Gateway invoke URL:
+
+<script>
+  const apiBaseUrl = "https://<your-api-id>.execute-api.<region>.amazonaws.com/prod";
+</script>
+
+3. Deploy Frontend to S3
+
+Create a new S3 bucket (e.g., my-serverless-webapp) and enable static website hosting.
+
+Upload index.html and other assets.
+
+4. Create DynamoDB Table
+
+Table Name: employeedata
+
+Partition Key: employeeid (String)
+
+5. Create Lambda Functions
+
+insertEmployeeData – Inserts data into DynamoDB.
+
+getEmployees – Fetches data from DynamoDB.
+
+Runtime: Python 3.13
+
+Attach AmazonDynamoDBFullAccess and AWSLambdaBasicExecutionRole.
+
+6. Configure API Gateway
+
+REST API with two resources:
+
+/insert → POST → insertEmployeeData
+
+/employees → GET → getEmployees
+
+Enable CORS for both resources.
+
+Deploy to stage prod.
+
+7. Optional: CloudFront
+
+Create a CloudFront distribution with the S3 bucket as origin.
+
+Enable HTTPS and caching for faster global delivery.
+
+Usage
+
+Open your CloudFront or S3 website URL in a browser.
+
+Fill out the form and click Save Data.
+
+Click View All Data to fetch and display entries.
+
+Technologies
+
+AWS S3
+
+AWS CloudFront
+
+AWS Lambda (Python 3.13)
+
+Amazon API Gateway
+
+Amazon DynamoDB
+
+HTML / JavaScript
+
+Contributing
+
+Contributions are welcome! Feel free to submit pull requests for improvements, bug fixes, or additional features.
