@@ -29,12 +29,10 @@ This project demonstrates a complete **serverless web application** deployed on 
 
 Frontend (HTML/JS hosted on S3)
 |
-v
 API Gateway (REST endpoints)
 /insert --> Lambda (Insert Data) --> DynamoDB
 /employees --> Lambda (Get Data) --> DynamoDB
 |
-v
 CloudFront (Global Distribution)
 
 
