@@ -25,6 +25,7 @@ This project demonstrates a complete **serverless web application** deployed on 
 
 ## Architecture
 
+<img width="940" height="390" alt="severless drawio" src="https://github.com/user-attachments/assets/ba0eeffc-fad3-4f51-adfe-6bef8fbc0e6a" />
 
 Frontend (HTML/JS hosted on S3)
 |
@@ -57,6 +58,7 @@ Update apiBaseUrl with your API Gateway invoke URL:
 const insertUrl = "https://<invoke url>.execute-api.ap-south-1.amazonaws.com/prod/insert";
     const getUrl = "https://<invoke url>.execute-api.ap-south-1.amazonaws.com/prod/employees";
 
+<img width="1712" height="406" alt="image" src="https://github.com/user-attachments/assets/0816697f-91de-4803-9529-730fd248d9de" />
 
 3. Deploy Frontend to S3
 
