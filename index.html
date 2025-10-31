@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JKGroup Company Employee Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    input {
+      margin: 8px;
+      padding: 8px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+    }
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>JKGroup Company Employee Data</h1>
+
+  <form id="employeeForm">
+    <input type="text" id="employeeid" placeholder="Employee ID" required><br>
+    <input type="text" id="name" placeholder="Name" required><br>
+    <input type="text" id="department" placeholder="Department" required><br>
+    <input type="text" id="salary" placeholder="Salary" required><br>
+    <button type="button" onclick="saveData()">Save Employee Data</button>
+    <button type="button" onclick="viewEmployees()">View All Employees</button>
+  </form>
+
+  <div id="message"></div>
+  <table id="employeeTable" style="display:none;">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const insertUrl = "https://k0k4vanq46.execute-api.ap-south-1.amazonaws.com/prod/insert";
+    const getUrl = "https://k0k4vanq46.execute-api.ap-south-1.amazonaws.com/prod/employees";
+
+    async function saveData() {
+      const data = {
+        employeeid: document.getElementById("employeeid").value,
+        name: document.getElementById("name").value,
+        department: document.getElementById("department").value,
+        salary: document.getElementById("salary").value
+      };
+
+      const response = await fetch(insertUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      document.getElementById("message").innerText = result.body
+        ? JSON.parse(result.body).message
+        : result.message;
+    }
+
+    async function viewEmployees() {
+      const response = await fetch(getUrl);
+      const data = await response.json();
+
+      // Parse if body is stringified
+      const employees = data.body ? JSON.parse(data.body) : data;
+
+      const table = document.getElementById("employeeTable");
+      const tbody = table.querySelector("tbody");
+      tbody.innerHTML = "";
+
+      employees.forEach(emp => {
+        const row = `<tr>
+          <td>${emp.employeeid}</td>
+          <td>${emp.name}</td>
+          <td>${emp.department}</td>
+          <td>${emp.salary}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+
+      table.style.display = "table";
+    }
+  </script>
+</body>
+</html>
