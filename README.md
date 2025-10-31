@@ -27,7 +27,7 @@ This project demonstrates a complete **serverless web application** deployed on 
 
 <img width="940" height="390" alt="severless drawio" src="https://github.com/user-attachments/assets/9336a247-e399-48a7-a3e5-1ed80344b658" />
 
-rontend (HTML/JS hosted on S3)
+Frontend (HTML/JS hosted on S3)
 |
 v
 API Gateway (REST endpoints)
@@ -46,8 +46,8 @@ CloudFront (Global Distribution)
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<username>/aws-serverless-webapp-with-cloudfront.git
-cd aws-serverless-webapp-with-cloudfront
+git clone https://github.com/Omkar8284/cloudify-serverless-app/
+cd /cloudify-serverless-app/
 
 2. Configure Frontend
 
@@ -55,9 +55,8 @@ Open index.html.
 
 Update apiBaseUrl with your API Gateway invoke URL:
 
-<script>
-  const apiBaseUrl = "https://<your-api-id>.execute-api.<region>.amazonaws.com/prod";
-</script>
+<img width="1712" height="444" alt="image" src="https://github.com/user-attachments/assets/c71dd234-217f-4b8a-a447-25e5ee1a52dd" />
+
 
 3. Deploy Frontend to S3
 
