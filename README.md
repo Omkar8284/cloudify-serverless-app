@@ -25,7 +25,6 @@ This project demonstrates a complete **serverless web application** deployed on 
 
 ## Architecture
 
-<img width="940" height="390" alt="severless drawio" src="https://github.com/user-attachments/assets/9336a247-e399-48a7-a3e5-1ed80344b658" />
 
 Frontend (HTML/JS hosted on S3)
 |
@@ -55,7 +54,8 @@ Open index.html.
 
 Update apiBaseUrl with your API Gateway invoke URL:
 
-<img width="1712" height="444" alt="image" src="https://github.com/user-attachments/assets/c71dd234-217f-4b8a-a447-25e5ee1a52dd" />
+const insertUrl = "https://<invoke url>.execute-api.ap-south-1.amazonaws.com/prod/insert";
+    const getUrl = "https://<invoke url>.execute-api.ap-south-1.amazonaws.com/prod/employees";
 
 
 3. Deploy Frontend to S3
@@ -98,7 +98,7 @@ Create a CloudFront distribution with the S3 bucket as origin.
 
 Enable HTTPS and caching for faster global delivery.
 
-Usage
+Usage: 
 
 Open your CloudFront or S3 website URL in a browser.
 
@@ -106,18 +106,13 @@ Fill out the form and click Save Data.
 
 Click View All Data to fetch and display entries.
 
-Technologies
+• Technologies
 
 AWS S3
-
 AWS CloudFront
-
 AWS Lambda (Python 3.13)
-
 Amazon API Gateway
-
-Amazon DynamoDB
-
+Amazom DynamoDB
 HTML / JavaScript
 
 Contributing
